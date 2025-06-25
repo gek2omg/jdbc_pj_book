@@ -5,6 +5,12 @@ import jdbc.mvc.dto.BookDTO;
 
 import java.util.Scanner;
 
+/**
+ * 작성일 : 2025.6.18<br>
+ * 작성자 : 김동관<br>
+ * 설명 : 도서 메뉴는 화면에서 사용자가 입력하거나 마우스를 클릭하는 대용하는 파일이다.
+ * 메뉴선택, 자료 입력등
+ */
 public class Menu {
 
     // 입력을 위한 스캐너
