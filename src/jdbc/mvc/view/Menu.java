@@ -90,13 +90,14 @@ public class Menu {
         }
     }
 
-    // 수정, 삭제, 조회
+    // 도서번호 입력 : 수정, 삭제, 조회
     private int bookId() {
         System.out.print("도서번호 : ");
         int bookid = Integer.parseInt(scan.nextLine());
         return bookid;
     }
 
+    // 도서 제목 입력 : 조서 제목 검색시 사용
     private String bookTitle() {
         System.out.print("도서제목 : ");
         String title = scan.nextLine();
