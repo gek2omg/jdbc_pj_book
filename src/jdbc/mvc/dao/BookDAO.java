@@ -8,21 +8,21 @@ import java.util.List;
 public interface BookDAO {
 
     // 1. 도서 추가
-    public int bookInsert(BookDTO bookDTO);
+    public int insertBook(BookDTO bookDTO);
 
     // 2. 도서 수정
-    public int bookUpdate(BookDTO bookDTO);
+    public int updateBook(BookDTO bookDTO);
 
     // 3. 도서 삭제
-    public int bookDelete(int bookId);
+    public int deleteBook(int bookId);
 
     // 4. 도서 아이디 조회
-    public BookDTO bookFindById(int bookId);
+    public BookDTO condFindById(int bookId);
 
     // 5. 도서제목 조회
-    public List<BookDTO> bookFindByTitle(String title);
+    public List<BookDTO> condFindByTitle(String title);
 
     // 6. 전체목록 조회
-    public List<BookDTO> bookFindAll();
+    public List<BookDTO> condFindAll();
 
 }

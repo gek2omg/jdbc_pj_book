@@ -5,8 +5,6 @@ import jdbc.mvc.service.BookService;
 import jdbc.mvc.service.BookServiceImpl;
 import jdbc.mvc.view.BookView;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -25,7 +23,7 @@ public class BookController {
         System.out.println("<<< bookInsert() >>>");
         System.out.println(bookDTO);
 
-        int insertCnt = bookService.bookInsert(bookDTO);
+        int insertCnt = bookService.saveBook(bookDTO);
 
         if (insertCnt == 1) {
             System.out.println("도서 정보 추가 성공!!" + insertCnt);
@@ -39,7 +37,7 @@ public class BookController {
         System.out.println("<<< bookUpdate() >>>");
         System.out.println(bookDTO);
 
-        int updateCnt = bookService.bookUpdate(bookId, bookDTO);
+        int updateCnt = bookService.modifyBook(bookId, bookDTO);
 
         if (updateCnt == 1) {
             System.out.println("도서 정보 수정 성공!!" + updateCnt);
@@ -52,7 +50,7 @@ public class BookController {
     public void bookDelete(int bookId) {
         System.out.println("<<< bookDelete() >>>");
 
-        int deleteCnt = bookService.bookDelete(bookId);
+        int deleteCnt = bookService.removeBook(bookId);
         if (deleteCnt == 1) {
             System.out.println("도서 정보 삭제 성공!!" + deleteCnt);
         } else {
@@ -63,7 +61,7 @@ public class BookController {
     // 4.도서아디 조회
     public void bookFindById(int bookId) {
         System.out.println("<<< bookFindId() >>>");
-        BookDTO book = bookService.bookFindById(bookId);
+        BookDTO book = bookService.findById(bookId);
         if(book != null) {
             System.out.println("번호\t제목\t저자\t출판사\t출판일");
             System.out.print(book.getBookId()+"\t");
@@ -80,7 +78,7 @@ public class BookController {
     // 5.도서제목 조회
     public void bookFindByTitle(String title) {
         System.out.println("<<< bookFindByTitle() >>>");
-        List<BookDTO> bookDTOList = bookService.bookFindTitle(title);
+        List<BookDTO> bookDTOList = bookService.findByTitle(title);
         if (bookDTOList != null) {
             System.out.println("도서 정보 제목 조회 성공!!");
             for (BookDTO bookDTO : bookDTOList) {
@@ -95,7 +93,7 @@ public class BookController {
     // 6.전체목록 조회
     public void bookFindAll() {
         System.out.println("<<< bookFindAll() >>>");
-        List<BookDTO> bookDTOList = bookService.bookFindAll();
+        List<BookDTO> bookDTOList = bookService.findAll();
         if (bookDTOList != null) {
             System.out.println("도서 정보 전체 조회 성공!!");
             for (BookDTO bookDTO : bookDTOList) {

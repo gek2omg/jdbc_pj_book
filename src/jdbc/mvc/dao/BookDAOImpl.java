@@ -27,10 +27,10 @@ public class BookDAOImpl implements BookDAO {
 
     // 1. 도서 추가
     @Override
-    public int bookInsert(BookDTO bookDTO) {
+    public int insertBook(BookDTO bookDTO) {
         System.out.println("BookServiceImpl - bookInsert()");
 
-        int insertCnt  = 0;
+        int result  = 0;
 
         String query = "INSERT INTO mvc_book_tbl(bookid, title, author, publisher, price) "
                         + "VALUES ((SELECT NVL(MAX(bookId) + 1, 1) FROM MVC_BOOK_TBL MBT), ?, ?, ?, ?)";
@@ -43,7 +43,7 @@ public class BookDAOImpl implements BookDAO {
             pstmt.setString(3, bookDTO.getPublisher());
             pstmt.setInt(4, bookDTO.getPrice());
 
-            insertCnt = pstmt.executeUpdate();  // 입력, 수정, 삭제 등의 SQL 실행 => 1:성공, 0:실패
+            result = pstmt.executeUpdate();  // 입력, 수정, 삭제 등의 SQL 실행 => 1:성공, 0:실패
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -55,12 +55,12 @@ public class BookDAOImpl implements BookDAO {
             }
         }
 
-        return insertCnt;
+        return result;
     }
 
     // 2. 도서 수정
     @Override
-    public int bookUpdate(BookDTO bookDTO) {
+    public int updateBook(BookDTO bookDTO) {
         int updateCnt  = 0;
 
         String query = "UPDATE mvc_book_tbl SET title = ?, author = ?, publisher = ?, price = ? WHERE bookid = ?";
@@ -91,7 +91,7 @@ public class BookDAOImpl implements BookDAO {
 
     // 도서 삭제
     @Override
-    public int bookDelete(int bookId) {
+    public int deleteBook(int bookId) {
         int deleteCnt  = 0;
 
         String query = "DELETE mvc_book_tbl WHERE bookid = ?";
@@ -117,7 +117,7 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public BookDTO bookFindById(int bookId) {
+    public BookDTO condFindById(int bookId) {
         BookDTO book = null;
         String query = "SELECT * FROM mvc_book_tbl WHERE bookid = ?";
 
@@ -152,7 +152,7 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public List<BookDTO> bookFindByTitle(String title) {
+    public List<BookDTO> condFindByTitle(String title) {
         List<BookDTO> bookDTOList = new ArrayList<>();
 
         String query = "SELECT * FROM mvc_book_tbl WHERE title LIKE '%' || ? || '%' ORDER BY pubdate DESC";
@@ -190,7 +190,7 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public List<BookDTO> bookFindAll() {
+    public List<BookDTO> condFindAll() {
         List<BookDTO> bookDTOList = new ArrayList<>();
 
         String query = "SELECT * FROM mvc_book_tbl ORDER BY pubdate DESC";
