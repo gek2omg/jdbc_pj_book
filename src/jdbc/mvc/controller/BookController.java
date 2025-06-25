@@ -15,7 +15,21 @@ import java.util.List;
  * BookController -> BookServiceImpl(BookService) -> BookDAOImple(BookDAO)
  */
 public class BookController {
-    BookService bookService = new BookServiceImpl();
+    private static BookController instance;
+    private final BookService bookService;
+
+    private BookController() {
+        bookService = BookServiceImpl.getInstance();
+    }
+
+    public static BookController getInstance() {
+        if (instance == null) {
+            instance = new BookController();
+        }
+        return instance;
+    }
+
+//    BookService bookService = new BookServiceImpl();
     BookView bookView = new BookView();
 
     // 1.도서 추가

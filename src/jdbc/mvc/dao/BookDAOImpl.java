@@ -11,12 +11,15 @@ import java.util.List;
  * 데이터베이스와 직접 연동하여 도서 정보 처리
  */
 public class BookDAOImpl implements BookDAO {
-    // 싱글톤
-    private static BookDAOImpl instance = new BookDAOImpl();
+
+    private static BookDAOImpl instance;
 
     private BookDAOImpl() {}
 
     public static BookDAOImpl getInstance() {
+        if (instance == null) {
+            instance = new BookDAOImpl();
+        }
         return instance;
     }
 
@@ -29,6 +32,11 @@ public class BookDAOImpl implements BookDAO {
     PreparedStatement pstmt = null; // SQL 문장
     ResultSet rs = null;            // SQL 실행결과(SELECT 절에서만 사용)
 
+    // 데이터베이스 접속
+    public Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(dbUrl, dbID, dbPassword);
+    }
+
     // 1. 도서 추가
     @Override
     public int insertBook(BookDTO bookDTO) {
@@ -40,7 +48,7 @@ public class BookDAOImpl implements BookDAO {
                         + "VALUES ((SELECT NVL(MAX(bookId) + 1, 1) FROM MVC_BOOK_TBL MBT), ?, ?, ?, ?)";
 
         try {
-            conn = DriverManager.getConnection(dbUrl, dbID, dbPassword);    // 오라클 연결
+            conn = getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
             pstmt.setString(1, bookDTO.getTitle());     // 1은 ?물음표 위치
             pstmt.setString(2, bookDTO.getAuthor());
@@ -70,7 +78,7 @@ public class BookDAOImpl implements BookDAO {
         String query = "UPDATE mvc_book_tbl SET title = ?, author = ?, publisher = ?, price = ? WHERE bookid = ?";
 
         try {
-            conn = DriverManager.getConnection(dbUrl, dbID, dbPassword);    // 오라클 연결
+            conn = getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
             pstmt.setString(1, bookDTO.getTitle());     // 1은 ?물음표 위치
             pstmt.setString(2, bookDTO.getAuthor());
@@ -101,7 +109,7 @@ public class BookDAOImpl implements BookDAO {
         String query = "DELETE mvc_book_tbl WHERE bookid = ?";
 
         try {
-            conn = DriverManager.getConnection(dbUrl, dbID, dbPassword);    // 오라클 연결
+            conn = getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
             pstmt.setInt(1, bookId);
 
@@ -126,7 +134,7 @@ public class BookDAOImpl implements BookDAO {
         String query = "SELECT * FROM mvc_book_tbl WHERE bookid = ?";
 
         try {
-            conn = DriverManager.getConnection(dbUrl, dbID, dbPassword);    // 오라클 연결
+            conn = getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
             pstmt.setInt(1, bookId);
 
@@ -162,7 +170,7 @@ public class BookDAOImpl implements BookDAO {
         String query = "SELECT * FROM mvc_book_tbl WHERE title LIKE '%' || ? || '%' ORDER BY pubdate DESC";
 
         try {
-            conn = DriverManager.getConnection(dbUrl, dbID, dbPassword);    // 오라클 연결
+            conn = getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
             pstmt.setString(1, title);
 
@@ -200,7 +208,7 @@ public class BookDAOImpl implements BookDAO {
         String query = "SELECT * FROM mvc_book_tbl ORDER BY pubdate DESC";
 
         try {
-            conn = DriverManager.getConnection(dbUrl, dbID, dbPassword);    // 오라클 연결
+            conn = getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
 
             rs = pstmt.executeQuery();

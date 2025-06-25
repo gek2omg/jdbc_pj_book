@@ -1,17 +1,32 @@
 package jdbc.mvc.service;
 
+import jdbc.mvc.dao.BookDAO;
 import jdbc.mvc.dao.BookDAOImpl;
 import jdbc.mvc.dto.BookDTO;
 
 import java.util.List;
 
 public class BookServiceImpl implements BookService {
+    private static BookServiceImpl instance;
+    private final BookDAO bookDAO;
+
+    public BookServiceImpl() {
+        this.bookDAO = BookDAOImpl.getInstance();
+    }
+
+    public static BookServiceImpl getInstance() {
+        if (instance == null) {
+            instance = new BookServiceImpl();
+        }
+        return instance;
+    }
+
     @Override
     public int saveBook(BookDTO bookDTO) {
         System.out.println("BookServiceImpl - bookInsert()");
 
-        BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
-        int insertCnt = bookDAOImpl.insertBook(bookDTO);
+//        BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
+        int insertCnt = bookDAO.insertBook(bookDTO);
 
         return insertCnt;
     }
@@ -20,9 +35,9 @@ public class BookServiceImpl implements BookService {
     public int modifyBook(int bookId, BookDTO bookDTO) {
         System.out.println("BookServiceImpl - modifyBook()");
 
-        BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
+//        BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
         bookDTO.setBookId(bookId);
-        int updateCnt = bookDAOImpl.updateBook(bookDTO);
+        int updateCnt = bookDAO.updateBook(bookDTO);
 
         return updateCnt;
     }
@@ -31,8 +46,8 @@ public class BookServiceImpl implements BookService {
     public int removeBook(int bookId) {
         System.out.println("BookServiceImpl - removeBook()");
 
-        BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
-        int deleteCnt = bookDAOImpl.deleteBook(bookId);
+//        BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
+        int deleteCnt = bookDAO.deleteBook(bookId);
 
         return deleteCnt;
     }
@@ -41,8 +56,8 @@ public class BookServiceImpl implements BookService {
     public BookDTO findBookById(int bookId) {
         System.out.println("BookServiceImpl - findBookById()");
 
-        BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
-        BookDTO book = bookDAOImpl.selectBookFindById(bookId);
+//        BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
+        BookDTO book = bookDAO.selectBookFindById(bookId);
         return book;
     }
 
@@ -50,8 +65,8 @@ public class BookServiceImpl implements BookService {
     public List<BookDTO> findBookByTitle(String title) {
         System.out.println("BookServiceImpl - findBookByTitle()");
 
-        BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
-        List<BookDTO> book = bookDAOImpl.selectBookFindByTitle(title);
+//        BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
+        List<BookDTO> book = bookDAO.selectBookFindByTitle(title);
         return book;
     }
 
@@ -59,8 +74,8 @@ public class BookServiceImpl implements BookService {
     public List<BookDTO> findBookAll() {
         System.out.println("BookServiceImpl - findBookAll()");
 
-        BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
-        List<BookDTO> book = bookDAOImpl.selectBookFindAll();
+//        BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
+        List<BookDTO> book = bookDAO.selectBookFindAll();
         return book;
     }
 }

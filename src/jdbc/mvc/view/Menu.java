@@ -13,9 +13,10 @@ import java.util.Scanner;
  */
 public class Menu {
 
+    BookController bookController = BookController.getInstance();
+
     // 입력을 위한 스캐너
     Scanner scan = new Scanner(System.in);
-    BookController bookController = new BookController();
 
     // 1. 도서관리  2. 게시판  3.와인    4.종료
     public void displayMenu() {
