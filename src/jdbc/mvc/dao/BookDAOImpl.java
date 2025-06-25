@@ -1,6 +1,7 @@
 package jdbc.mvc.dao;
 
 import jdbc.mvc.dto.BookDTO;
+import jdbc.mvc.util.DBUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -23,33 +24,27 @@ public class BookDAOImpl implements BookDAO {
         return instance;
     }
 
-    // DB 연결
-    String dbUrl = "jdbc:oracle:thin:@localhost:1521:xe";
-    String dbID = "scott_05";       // 계정
-    String dbPassword = "tiger";    // 비밀번호
 
     Connection conn = null;         // 오라클 연결
     PreparedStatement pstmt = null; // SQL 문장
     ResultSet rs = null;            // SQL 실행결과(SELECT 절에서만 사용)
 
-    // 데이터베이스 접속
-    public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(dbUrl, dbID, dbPassword);
-    }
 
     // 1. 도서 추가
     @Override
     public int insertBook(BookDTO bookDTO) {
-        System.out.println("BookServiceImpl - bookInsert()");
+        String query = """
+                        INSERT INTO mvc_book_tbl(bookid, title, author, publisher, price)
+                        VALUES ((SELECT NVL(MAX(bookId) + 1, 1) FROM MVC_BOOK_TBL MBT), ?, ?, ?, ?)
+        """;
 
         int result  = 0;
-
-        String query = "INSERT INTO mvc_book_tbl(bookid, title, author, publisher, price) "
-                        + "VALUES ((SELECT NVL(MAX(bookId) + 1, 1) FROM MVC_BOOK_TBL MBT), ?, ?, ?, ?)";
+        System.out.println("BookServiceImpl - bookInsert()");
 
         try {
-            conn = getConnection();   // 오라클 연결
+            conn = DBUtil.getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
+
             pstmt.setString(1, bookDTO.getTitle());     // 1은 ?물음표 위치
             pstmt.setString(2, bookDTO.getAuthor());
             pstmt.setString(3, bookDTO.getPublisher());
@@ -78,7 +73,7 @@ public class BookDAOImpl implements BookDAO {
         String query = "UPDATE mvc_book_tbl SET title = ?, author = ?, publisher = ?, price = ? WHERE bookid = ?";
 
         try {
-            conn = getConnection();   // 오라클 연결
+            conn = DBUtil.getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
             pstmt.setString(1, bookDTO.getTitle());     // 1은 ?물음표 위치
             pstmt.setString(2, bookDTO.getAuthor());
@@ -109,7 +104,7 @@ public class BookDAOImpl implements BookDAO {
         String query = "DELETE mvc_book_tbl WHERE bookid = ?";
 
         try {
-            conn = getConnection();   // 오라클 연결
+            conn = DBUtil.getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
             pstmt.setInt(1, bookId);
 
@@ -134,7 +129,7 @@ public class BookDAOImpl implements BookDAO {
         String query = "SELECT * FROM mvc_book_tbl WHERE bookid = ?";
 
         try {
-            conn = getConnection();   // 오라클 연결
+            conn = DBUtil.getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
             pstmt.setInt(1, bookId);
 
@@ -170,7 +165,7 @@ public class BookDAOImpl implements BookDAO {
         String query = "SELECT * FROM mvc_book_tbl WHERE title LIKE '%' || ? || '%' ORDER BY pubdate DESC";
 
         try {
-            conn = getConnection();   // 오라클 연결
+            conn = DBUtil.getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
             pstmt.setString(1, title);
 
@@ -208,7 +203,7 @@ public class BookDAOImpl implements BookDAO {
         String query = "SELECT * FROM mvc_book_tbl ORDER BY pubdate DESC";
 
         try {
-            conn = getConnection();   // 오라클 연결
+            conn = DBUtil.getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
 
             rs = pstmt.executeQuery();

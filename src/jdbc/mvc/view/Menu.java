@@ -25,8 +25,22 @@ public class Menu {
             System.out.println("    1. 도서관리    2.게시판    3.와인    4.종료 ");
             System.out.println("*---------------------------------------------*");
             System.out.print("▶ 메뉴선택 : ");
-            int menuNo = scan.nextInt();
-            scan.nextLine();
+
+            int menuNo = 0;
+
+            while(true) {
+                try {
+                    String input = scan.nextLine();
+                    menuNo = Integer.parseInt(input);
+                    if(menuNo < 1 || menuNo > 4) {
+                        System.out.println("1부터 4 사이 숫자를 입력해주세요.");
+                        continue;
+                    }
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("숫자만 입력해주세요.");
+                }
+            }
 
             switch(menuNo) {
                 case 1:
@@ -59,8 +73,22 @@ public class Menu {
             System.out.println("    1. 추가    2.수정    3.삭제    4.도서아이디 조회    5.도서 제목 조회    6.전체목록 조회    7.종료    ");
             System.out.println("*------------------------------------------------------------------------------------------------------*");
             System.out.print("▶ 메뉴선택 : ");
-            int menuNo = scan.nextInt();
-            scan.nextLine();
+
+            int menuNo = 0;
+
+            while(true) {
+                try {
+                    String input = scan.nextLine(); // 문자열로 받기
+                    menuNo = Integer.parseInt(input); // 직접 파싱
+                    if(menuNo < 1 || menuNo > 7) {
+                        System.out.println("1부터 7 사이의 숫자를 입력해주세요.");
+                        continue;
+                    }
+                    break;
+                } catch (NumberFormatException  e) {
+                    System.out.println("숫자만 입력해주세요.");
+                }
+            }
 
             switch(menuNo) {
                 case 1:
@@ -93,8 +121,16 @@ public class Menu {
 
     // 도서번호 입력 : 수정, 삭제, 조회
     private int bookId() {
-        System.out.print("도서번호 : ");
-        int bookid = Integer.parseInt(scan.nextLine());
+        int bookid = 0;
+        while (true) {
+            try {
+                System.out.print("도서번호 : ");
+                bookid = Integer.parseInt(scan.nextLine()); // 예외 발생 가능 지점
+                break; // 숫자 입력 성공 시 반복 종료
+            } catch (NumberFormatException e) {
+                System.out.println("숫자만 입력해주세요.");
+            }
+        }
         return bookid;
     }
 
