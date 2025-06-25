@@ -6,6 +6,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * BookDAO 구현체
+ * 데이터베이스와 직접 연동하여 도서 정보 처리
+ */
 public class BookDAOImpl implements BookDAO {
     // 싱글톤
     private static BookDAOImpl instance = new BookDAOImpl();
@@ -61,7 +65,7 @@ public class BookDAOImpl implements BookDAO {
     // 2. 도서 수정
     @Override
     public int updateBook(BookDTO bookDTO) {
-        int updateCnt  = 0;
+        int result  = 0;
 
         String query = "UPDATE mvc_book_tbl SET title = ?, author = ?, publisher = ?, price = ? WHERE bookid = ?";
 
@@ -74,7 +78,7 @@ public class BookDAOImpl implements BookDAO {
             pstmt.setInt(4, bookDTO.getPrice());
             pstmt.setInt(5, bookDTO.getBookId());
 
-            updateCnt = pstmt.executeUpdate();  // 입력, 수정, 삭제 등의 SQL 실행 => 1:성공, 0:실패
+            result = pstmt.executeUpdate();  // 입력, 수정, 삭제 등의 SQL 실행 => 1:성공, 0:실패
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -86,13 +90,13 @@ public class BookDAOImpl implements BookDAO {
             }
         }
 
-        return updateCnt;
+        return result;
     }
 
     // 도서 삭제
     @Override
     public int deleteBook(int bookId) {
-        int deleteCnt  = 0;
+        int result  = 0;
 
         String query = "DELETE mvc_book_tbl WHERE bookid = ?";
 
@@ -101,7 +105,7 @@ public class BookDAOImpl implements BookDAO {
             pstmt = conn.prepareStatement(query);   // SQL 작성
             pstmt.setInt(1, bookId);
 
-            deleteCnt = pstmt.executeUpdate();  // 입력, 수정, 삭제 등의 SQL 실행 => 1:성공, 0:실패
+            result = pstmt.executeUpdate();  // 입력, 수정, 삭제 등의 SQL 실행 => 1:성공, 0:실패
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -113,7 +117,7 @@ public class BookDAOImpl implements BookDAO {
             }
         }
 
-        return deleteCnt;
+        return result;
     }
 
     @Override
