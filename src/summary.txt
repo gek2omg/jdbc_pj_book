@@ -1,0 +1,29 @@
+플젝가이드
+
+DTO(데이터 전송 객체 : Data Transfer Object)
+    입력(INSERT), 수정(UPDATE) : 화면(setter) => setter -> 멤버변수 -> getter(DB)
+    조회(SELECT) : setter(DB) -> 멤버변수 -> getter(화면)
+
+DAO(데이터 접근 객체 : Data Access Object) => CRUD(입력, 수정, 삭제, 조회)
+
+화면단(V, View) - 콘솔 : BookMain -> Menu -> 메뉴선택
+백엔드단(비즈니스 로직 구현) :
+         -> BookController(C, 콘트롤러)
+         -> Model(M, 모델) = 서비스 + DAO + DTO
+            -> BookServiceImpl(BookService) -> BookDAOImpl(BookDAO)
+               (서비스 : DAO 호출, 결과 리턴)  (DAO : 데이터 입력,수정,삭제,조회)
+
+---------------------------------------------------------------------------------
+-- [ JDBC 테이블 생성 ] --
+-- 1) 도서정보 테이블(scott_05 계정에서 생성)
+DROP TABLE mvc_book_tbl cascase contraints;
+CREATE TABLE mvc_book_tbl (
+    bookid NUMBER(4) PRIMARY KEY, -- 도서번호
+    title varchar2(50) NOT NULL, -- 도서명
+    author varchar2(50) NOT NULL, -- 저자
+    publisher varchar2(50) NOT NULL, -- 출판사
+    price NUMBER(7) NOT NULL, -- 가격
+    pubdate DATE DEFAULT sysdate -- 출판일
+);
+
+SELECT * FROM mvc_book_tbl;
