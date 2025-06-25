@@ -57,22 +57,22 @@ public class Menu {
 
             switch(menuNo) {
                 case 1:
-                    bookController.bookInsert(bookInput());
+                    bookController.saveBook(bookInput());
                     break;
                 case 2:
-                    bookController.bookUpdate(bookId(), bookInput());
+                    bookController.modifyBook(bookId(), bookInput());
                     break;
                 case 3:
-                    bookController.bookDelete(bookId());
+                    bookController.removeBook(bookId());
                     break;
                 case 4:
-                    bookController.bookFindById(bookId());
+                    bookController.findBookById(bookId());
                     break;
                 case 5:
-                    bookController.bookFindByTitle(bookTitle());
+                    bookController.findBookByTitle(bookTitle());
                     break;
                 case 6:
-                    bookController.bookFindAll();
+                    bookController.findBookAll();
                     break;
                 case 7:
                     System.out.println("프로그램을 종료합니다.");
