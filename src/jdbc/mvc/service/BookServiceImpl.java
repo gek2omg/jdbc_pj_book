@@ -18,7 +18,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public int modifyBook(int bookId, BookDTO bookDTO) {
-        System.out.println("BookServiceImpl - bookUpdate()");
+        System.out.println("BookServiceImpl - modifyBook()");
 
         BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
         bookDTO.setBookId(bookId);
@@ -29,7 +29,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public int removeBook(int bookId) {
-        System.out.println("BookServiceImpl - bookDelete()");
+        System.out.println("BookServiceImpl - removeBook()");
 
         BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
         int deleteCnt = bookDAOImpl.deleteBook(bookId);
@@ -38,29 +38,29 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDTO findById(int bookId) {
-        System.out.println("BookServiceImpl - bookFindById()");
+    public BookDTO findBookById(int bookId) {
+        System.out.println("BookServiceImpl - findBookById()");
 
         BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
-        BookDTO book = bookDAOImpl.condFindById(bookId);
+        BookDTO book = bookDAOImpl.selectBookFindById(bookId);
         return book;
     }
 
     @Override
-    public List<BookDTO> findByTitle(String title) {
-        System.out.println("BookServiceImpl - bookFindTitle()");
+    public List<BookDTO> findBookByTitle(String title) {
+        System.out.println("BookServiceImpl - findBookByTitle()");
 
         BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
-        List<BookDTO> book = bookDAOImpl.condFindByTitle(title);
+        List<BookDTO> book = bookDAOImpl.selectBookFindByTitle(title);
         return book;
     }
 
     @Override
-    public List<BookDTO> findAll() {
-        System.out.println("BookServiceImpl - bookFindAll()");
+    public List<BookDTO> findBookAll() {
+        System.out.println("BookServiceImpl - findBookAll()");
 
         BookDAOImpl bookDAOImpl = BookDAOImpl.getInstance();
-        List<BookDTO> book = bookDAOImpl.condFindAll();
+        List<BookDTO> book = bookDAOImpl.selectBookFindAll();
         return book;
     }
 }

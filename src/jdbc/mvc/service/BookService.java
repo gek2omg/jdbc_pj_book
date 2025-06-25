@@ -16,11 +16,11 @@ public interface BookService {
     public int removeBook(int bookId);
 
     // 4.도서아디 조회
-    public BookDTO findById(int bookId);
+    public BookDTO findBookById(int bookId);
 
     // 5.도서제목 조회
-    public List<BookDTO> findByTitle(String title);
+    public List<BookDTO> findBookByTitle(String title);
 
     // 6.전체목록 조회
-    public List<BookDTO> findAll();
+    public List<BookDTO> findBookAll();
 }

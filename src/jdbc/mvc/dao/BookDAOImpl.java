@@ -117,7 +117,7 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public BookDTO condFindById(int bookId) {
+    public BookDTO selectBookFindById(int bookId) {
         BookDTO book = null;
         String query = "SELECT * FROM mvc_book_tbl WHERE bookid = ?";
 
@@ -152,7 +152,7 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public List<BookDTO> condFindByTitle(String title) {
+    public List<BookDTO> selectBookFindByTitle(String title) {
         List<BookDTO> bookDTOList = new ArrayList<>();
 
         String query = "SELECT * FROM mvc_book_tbl WHERE title LIKE '%' || ? || '%' ORDER BY pubdate DESC";
@@ -190,7 +190,7 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public List<BookDTO> condFindAll() {
+    public List<BookDTO> selectBookFindAll() {
         List<BookDTO> bookDTOList = new ArrayList<>();
 
         String query = "SELECT * FROM mvc_book_tbl ORDER BY pubdate DESC";

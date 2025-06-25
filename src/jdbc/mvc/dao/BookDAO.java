@@ -17,12 +17,12 @@ public interface BookDAO {
     public int deleteBook(int bookId);
 
     // 4. 도서 아이디 조회
-    public BookDTO condFindById(int bookId);
+    public BookDTO selectBookFindById(int bookId);
 
     // 5. 도서제목 조회
-    public List<BookDTO> condFindByTitle(String title);
+    public List<BookDTO> selectBookFindByTitle(String title);
 
     // 6. 전체목록 조회
-    public List<BookDTO> condFindAll();
+    public List<BookDTO> selectBookFindAll();
 
 }
