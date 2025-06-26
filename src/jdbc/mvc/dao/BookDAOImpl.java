@@ -73,7 +73,7 @@ public class BookDAOImpl implements BookDAO {
         String query = """
                         UPDATE mvc_book_tbl 
                            SET title = ?, author = ?, publisher = ?, price = ? 
-                         WHERE bookid = ?
+                         WHERE bookId = ?
         """;
 
         try {

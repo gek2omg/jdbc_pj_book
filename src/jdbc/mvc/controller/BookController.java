@@ -48,12 +48,11 @@ public class BookController {
     // 2.도서 수정
     public void modifyBook(int bookId, BookDTO bookDTO) {
         System.out.println("<<< modifyBook() >>>");
-        System.out.println(bookDTO);
 
-        int updateCnt = bookService.modifyBook(bookId, bookDTO);
+        int result = bookService.modifyBook(bookId, bookDTO);
 
-        if (updateCnt == 1) {
-            System.out.println("도서 정보 수정 성공!!" + updateCnt);
+        if (result == 1) {
+            System.out.println("도서 정보 수정 성공!!" + result);
         } else {
             bookView.bookErrorMsg("update");
         }
@@ -77,7 +76,7 @@ public class BookController {
         System.out.println("<<< findBookById() >>>");
         BookDTO book = bookService.findBookById(bookId);
         if(book != null) {
-            System.out.println("도서 아이디 조회 성공");
+            System.out.println("도서 ID 조회 성공");
             System.out.println("---------------------------------");
             bookView.bookSelect(book);
         } else {

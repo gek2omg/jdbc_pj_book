@@ -42,7 +42,10 @@ public class BookMenu {
                     bookController.saveBook(bookInput());
                     break;
                 case 2:
-                    bookController.modifyBook(bookId(), bookInput());
+                    int bookId = bookId();
+                    bookController.findBookById(bookId);
+                    bookController.modifyBook(bookId, bookInput());
+                    bookController.findBookById(bookId);
                     break;
                 case 3:
                     bookController.removeBook(bookId());
