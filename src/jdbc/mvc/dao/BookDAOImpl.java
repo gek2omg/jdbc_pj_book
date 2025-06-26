@@ -45,7 +45,7 @@ public class BookDAOImpl implements BookDAO {
             conn = DBUtil.getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
 
-            pstmt.setString(1, bookDTO.getTitle());     // 1은 ?물음표 위치
+            pstmt.setString(1, bookDTO.getTitle());     // 1은 ? 물음표 위치
             pstmt.setString(2, bookDTO.getAuthor());
             pstmt.setString(3, bookDTO.getPublisher());
             pstmt.setInt(4, bookDTO.getPrice());
@@ -70,7 +70,11 @@ public class BookDAOImpl implements BookDAO {
     public int updateBook(BookDTO bookDTO) {
         int result  = 0;
 
-        String query = "UPDATE mvc_book_tbl SET title = ?, author = ?, publisher = ?, price = ? WHERE bookid = ?";
+        String query = """
+                        UPDATE mvc_book_tbl 
+                           SET title = ?, author = ?, publisher = ?, price = ? 
+                         WHERE bookid = ?
+        """;
 
         try {
             conn = DBUtil.getConnection();   // 오라클 연결
@@ -101,7 +105,10 @@ public class BookDAOImpl implements BookDAO {
     public int deleteBook(int bookId) {
         int result  = 0;
 
-        String query = "DELETE mvc_book_tbl WHERE bookid = ?";
+        String query = """
+                        DELETE mvc_book_tbl 
+                         WHERE bookid = ?
+        """;
 
         try {
             conn = DBUtil.getConnection();   // 오라클 연결
@@ -126,7 +133,10 @@ public class BookDAOImpl implements BookDAO {
     @Override
     public BookDTO selectBookFindById(int bookId) {
         BookDTO book = null;
-        String query = "SELECT * FROM mvc_book_tbl WHERE bookid = ?";
+        String query = """
+                        SELECT * FROM mvc_book_tbl 
+                         WHERE bookid = ?
+        """;
 
         try {
             conn = DBUtil.getConnection();   // 오라클 연결
@@ -162,7 +172,12 @@ public class BookDAOImpl implements BookDAO {
     public List<BookDTO> selectBookFindByTitle(String title) {
         List<BookDTO> bookDTOList = new ArrayList<>();
 
-        String query = "SELECT * FROM mvc_book_tbl WHERE title LIKE '%' || ? || '%' ORDER BY pubdate DESC";
+        String query = """
+                            SELECT * 
+                              FROM mvc_book_tbl 
+                             WHERE title LIKE '%' || ? || '%' 
+                             ORDER BY pubdate DESC
+        """;
 
         try {
             conn = DBUtil.getConnection();   // 오라클 연결
@@ -200,7 +215,11 @@ public class BookDAOImpl implements BookDAO {
     public List<BookDTO> selectBookFindAll() {
         List<BookDTO> bookDTOList = new ArrayList<>();
 
-        String query = "SELECT * FROM mvc_book_tbl ORDER BY pubdate DESC";
+        String query = """
+                            SELECT * 
+                              FROM mvc_book_tbl 
+                             ORDER BY pubdate DESC
+        """;
 
         try {
             conn = DBUtil.getConnection();   // 오라클 연결
