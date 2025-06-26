@@ -15,6 +15,7 @@ import java.util.Scanner;
 public class Menu {
 
     BookMenu bookMenu = BookMenu.getInstance();
+    StudentMenu studentMenu = StudentMenu.getInstance();
 
 
     // 입력을 위한 스캐너
@@ -23,9 +24,9 @@ public class Menu {
     // 1. 도서관리  2. 게시판  3.와인    4.종료
     public void displayMenu() {
         while(true) {
-            System.out.println("*---------------------------------------------*");
-            System.out.println("    1. 도서관리    2.게시판    3.와인    4.종료 ");
-            System.out.println("*---------------------------------------------*");
+            System.out.println("*------------------------------------------------------*");
+            System.out.println("    1. 도서관리    2.게시판    3.학생(수강생)    4.종료 ");
+            System.out.println("*------------------------------------------------------*");
             System.out.print("▶ 메뉴선택 : ");
 
             int menuNo = InputValidate.readMenuInput(scan, 1, 4);
@@ -38,7 +39,7 @@ public class Menu {
                     board_menu();
                     break;
                 case 3:
-                    wine_menu();
+                    studentMenu.student_menu();
                     break;
                 case 4:
                     System.out.println("프로그램을 종료합니다.");

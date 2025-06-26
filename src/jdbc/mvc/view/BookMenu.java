@@ -13,15 +13,15 @@ public class BookMenu {
     private static BookMenu instance;
     BookController bookController = BookController.getInstance();
 
+    // 입력을 위한 스캐너
+    Scanner scan = new Scanner(System.in);
+
     public static BookMenu getInstance() {
         if (instance == null) {
             instance = new BookMenu();
         }
         return instance;
     }
-
-    // 입력을 위한 스캐너
-    Scanner scan = new Scanner(System.in);
 
     /**
      * 1. 도서관리 메뉴

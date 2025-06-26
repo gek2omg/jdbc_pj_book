@@ -18,6 +18,8 @@ public class BookController {
     private static BookController instance;
     private final BookService bookService;
 
+    BookView bookView = BookView.getInstance();
+
     private BookController() {
         bookService = BookServiceImpl.getInstance();
     }
@@ -28,8 +30,6 @@ public class BookController {
         }
         return instance;
     }
-
-    BookView bookView = BookView.getInstance();
 
     // 1.도서 추가
     public void saveBook(BookDTO bookDTO) {
