@@ -1,18 +1,17 @@
 package jdbc.mvc.dto;
 
-// DTO(데이터 전송 객체 : Data Transfer Object) => DB테이블 : 멤버변수 : 화면 input 박스
+// DTO(데이터 전송 객체 : Data Transfer Object) => DB 테이블 : 멤버변수 : 화면 input 박스
 public class BookDTO {
 
     // 멤버변수
     private int bookId;         // 도서번호(PK)
     private String title;       // 도서명
-    private String author;     // 저자
+    private String author;      // 저자
     private String publisher;   // 출판사
     private int price;          // 가격
     private String pubdate;     // 출판일
 
     // 생성자
-
     public BookDTO() {
         super();
     }
@@ -27,8 +26,6 @@ public class BookDTO {
     }
 
     // 멤버메서드
-
-
     public int getBookId() {
         return bookId;
     }

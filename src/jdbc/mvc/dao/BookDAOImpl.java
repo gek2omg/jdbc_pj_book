@@ -218,7 +218,7 @@ public class BookDAOImpl implements BookDAO {
         String query = """
                             SELECT * 
                               FROM mvc_book_tbl 
-                             ORDER BY pubdate DESC
+                             ORDER BY bookId ASC
         """;
 
         try {

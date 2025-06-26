@@ -29,8 +29,7 @@ public class BookController {
         return instance;
     }
 
-//    BookService bookService = new BookServiceImpl();
-    BookView bookView = new BookView();
+    BookView bookView = BookView.getInstance();
 
     // 1.도서 추가
     public void saveBook(BookDTO bookDTO) {

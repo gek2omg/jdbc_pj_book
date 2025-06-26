@@ -10,6 +10,15 @@ import java.util.List;
  */
 public class BookView {
 
+    private static BookView instance;
+
+    public static BookView getInstance() {
+        if (instance == null) {
+            instance = new BookView();
+        }
+        return instance;
+    }
+
     // 에러메시지
     public void bookErrorMsg(String msg) {
         switch (msg) {
