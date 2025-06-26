@@ -64,26 +64,23 @@ public class BookController {
     public void removeBook(int bookId) {
         System.out.println("<<< removeBook() >>>");
 
-        int deleteCnt = bookService.removeBook(bookId);
-        if (deleteCnt == 1) {
-            System.out.println("도서 정보 삭제 성공!!" + deleteCnt);
+        int result = bookService.removeBook(bookId);
+        if (result == 1) {
+            System.out.println("도서 정보 삭제 성공!!" + result);
+            System.out.println("---------------------------------");
         } else {
             bookView.bookErrorMsg("delete");
         }
     }
 
-    // 4.도서아디 조회
+    // 4.도서 아이디 조회
     public void findBookById(int bookId) {
         System.out.println("<<< findBookById() >>>");
         BookDTO book = bookService.findBookById(bookId);
         if(book != null) {
-            System.out.println("번호\t제목\t저자\t출판사\t출판일");
-            System.out.print(book.getBookId()+"\t");
-            System.out.print(book.getTitle()+"\t");
-            System.out.print(book.getAuthor()+"\t");
-            System.out.print(book.getPublisher()+"\t");
-            System.out.print(book.getPubdate()+"\t");
-            System.out.println();
+            System.out.println("도서 아이디 조회 성공");
+            System.out.println("---------------------------------");
+            bookView.bookSelect(book);
         } else {
             bookView.bookErrorMsg("select");
         }
@@ -95,9 +92,8 @@ public class BookController {
         List<BookDTO> bookDTOList = bookService.findBookByTitle(title);
         if (bookDTOList != null) {
             System.out.println("도서 정보 제목 조회 성공!!");
-            for (BookDTO bookDTO : bookDTOList) {
-                System.out.println("도서:!!" + bookDTO);
-            }
+            System.out.println("---------------------------------");
+            bookView.bookList(bookDTOList);
         } else {
             bookView.bookErrorMsg("select");
         }
@@ -110,9 +106,8 @@ public class BookController {
         List<BookDTO> bookDTOList = bookService.findBookAll();
         if (bookDTOList != null) {
             System.out.println("도서 정보 전체 조회 성공!!");
-            for (BookDTO bookDTO : bookDTOList) {
-                System.out.println("도서!!" + bookDTO);
-            }
+            System.out.println("---------------------------------");
+            bookView.bookList(bookDTOList);
         } else {
             bookView.bookErrorMsg("select");
         }
