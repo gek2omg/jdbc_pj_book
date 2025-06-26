@@ -2,6 +2,7 @@ package jdbc.mvc.view;
 
 import jdbc.mvc.controller.BookController;
 import jdbc.mvc.dto.BookDTO;
+import jdbc.mvc.util.InputValidate;
 
 import java.util.Scanner;
 
@@ -27,21 +28,7 @@ public class Menu {
             System.out.println("*---------------------------------------------*");
             System.out.print("▶ 메뉴선택 : ");
 
-            int menuNo = 0;
-
-            while(true) {
-                try {
-                    String input = scan.nextLine();
-                    menuNo = Integer.parseInt(input);
-                    if(menuNo < 1 || menuNo > 4) {
-                        System.out.println("1부터 4 사이 숫자를 입력해주세요.");
-                        continue;
-                    }
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("숫자만 입력해주세요.");
-                }
-            }
+            int menuNo = InputValidate.readMenuInput(scan, 1, 4);
 
             switch(menuNo) {
                 case 1:
