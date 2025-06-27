@@ -25,9 +25,9 @@ public class BookServiceImpl implements BookService {
     public int saveBook(BookDTO bookDTO) {
         System.out.println("BookServiceImpl - bookInsert()");
 
-        int insertCnt = bookDAO.insertBook(bookDTO);
+        int result = bookDAO.insertBook(bookDTO);
 
-        return insertCnt;
+        return result;
     }
 
     @Override
@@ -35,9 +35,9 @@ public class BookServiceImpl implements BookService {
         System.out.println("BookServiceImpl - modifyBook()");
 
         bookDTO.setBookId(bookId);
-        int updateCnt = bookDAO.updateBook(bookDTO);
+        int result = bookDAO.updateBook(bookDTO);
 
-        return updateCnt;
+        return result;
     }
 
     @Override

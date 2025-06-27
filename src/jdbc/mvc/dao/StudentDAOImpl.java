@@ -1,118 +1,50 @@
 package jdbc.mvc.dao;
 
 import jdbc.mvc.dto.BookDTO;
+import jdbc.mvc.dto.StudentDTO;
 import jdbc.mvc.util.DBUtil;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * BookDAO 구현체
- * 데이터베이스와 직접 연동하여 도서 정보 처리
- */
-public class BookDAOImpl implements BookDAO {
-
-    private static BookDAOImpl instance;
+public class StudentDAOImpl implements StudentDAO {
+    private static StudentDAOImpl instance;
 
     Connection conn = null;         // 오라클 연결
     PreparedStatement pstmt = null; // SQL 문장
     ResultSet rs = null;            // SQL 실행결과(SELECT 절에서만 사용)
 
+    public StudentDAOImpl() {
+    }
 
-    private BookDAOImpl() {}
-
-    public static BookDAOImpl getInstance() {
+    public static StudentDAOImpl getInstance() {
         if (instance == null) {
-            instance = new BookDAOImpl();
+            instance = new StudentDAOImpl();
         }
         return instance;
     }
 
-    // 1. 도서 추가
     @Override
-    public int insertBook(BookDTO bookDTO) {
+    public int insert(StudentDTO studentDTO) {
+        System.out.println("insert");
         String query = """
-                        INSERT INTO mvc_book_tbl(bookid, title, author, publisher, price)
-                        VALUES ((SELECT NVL(MAX(bookId) + 1, 1) FROM MVC_BOOK_TBL MBT), ?, ?, ?, ?)
+                        INSERT INTO mvc_student_tbl(studentId, name, birthday, phone)
+                        VALUES ((SELECT NVL(MAX(studentId) + 1, 1) FROM MVC_STUDENT_TBL), ?, ?, ?)
         """;
 
         int result  = 0;
-        System.out.println("BookServiceImpl - bookInsert()");
 
         try {
             conn = DBUtil.getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
 
-            pstmt.setString(1, bookDTO.getTitle());     // 1은 ? 물음표 위치
-            pstmt.setString(2, bookDTO.getAuthor());
-            pstmt.setString(3, bookDTO.getPublisher());
-            pstmt.setInt(4, bookDTO.getPrice());
-
-            result = pstmt.executeUpdate();  // 입력, 수정, 삭제 등의 SQL 실행 => 1:성공, 0:실패
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if(pstmt != null) pstmt.close();
-                if(conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return result;
-    }
-
-    // 2. 도서 수정
-    @Override
-    public int updateBook(BookDTO bookDTO) {
-        int result  = 0;
-
-        String query = """
-                        UPDATE mvc_book_tbl 
-                           SET title = ?, author = ?, publisher = ?, price = ? 
-                         WHERE bookId = ?
-        """;
-
-        try {
-            conn = DBUtil.getConnection();   // 오라클 연결
-            pstmt = conn.prepareStatement(query);   // SQL 작성
-            pstmt.setString(1, bookDTO.getTitle());     // 1은 ?물음표 위치
-            pstmt.setString(2, bookDTO.getAuthor());
-            pstmt.setString(3, bookDTO.getPublisher());
-            pstmt.setInt(4, bookDTO.getPrice());
-            pstmt.setInt(5, bookDTO.getBookId());
-
-            result = pstmt.executeUpdate();  // 입력, 수정, 삭제 등의 SQL 실행 => 1:성공, 0:실패
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if(pstmt != null) pstmt.close();
-                if(conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return result;
-    }
-
-    // 도서 삭제
-    @Override
-    public int deleteBook(int bookId) {
-        int result  = 0;
-
-        String query = """
-                        DELETE mvc_book_tbl 
-                         WHERE bookid = ?
-        """;
-
-        try {
-            conn = DBUtil.getConnection();   // 오라클 연결
-            pstmt = conn.prepareStatement(query);   // SQL 작성
-            pstmt.setInt(1, bookId);
+            pstmt.setString(1, studentDTO.getName());     // 1은 ? 물음표 위치
+            pstmt.setString(2, studentDTO.getBirthday());
+            pstmt.setString(3, studentDTO.getPhone());
 
             result = pstmt.executeUpdate();  // 입력, 수정, 삭제 등의 SQL 실행 => 1:성공, 0:실패
         } catch (SQLException e) {
@@ -130,27 +62,87 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public BookDTO selectBookFindById(int bookId) {
-        BookDTO book = null;
+    public int update(StudentDTO studentDTO) {
+        int result  = 0;
+
         String query = """
-                        SELECT * FROM mvc_book_tbl 
-                         WHERE bookid = ?
+                        UPDATE mvc_student_tbl 
+                           SET name = ?, birthday = ?, phone = ?
+                         WHERE studentId = ?
         """;
 
         try {
             conn = DBUtil.getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
-            pstmt.setInt(1, bookId);
+            pstmt.setString(1, studentDTO.getName());     // 1은 ?물음표 위치
+            pstmt.setString(2, studentDTO.getBirthday());
+            pstmt.setString(3, studentDTO.getPhone());
+            pstmt.setInt(4, studentDTO.getStudentId());
+
+            result = pstmt.executeUpdate();  // 입력, 수정, 삭제 등의 SQL 실행 => 1:성공, 0:실패
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(pstmt != null) pstmt.close();
+                if(conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public int delete(int studentId) {
+        int result  = 0;
+
+        String query = """
+                        DELETE mvc_student_tbl 
+                         WHERE studentId = ?
+        """;
+
+        try {
+            conn = DBUtil.getConnection();   // 오라클 연결
+            pstmt = conn.prepareStatement(query);   // SQL 작성
+            pstmt.setInt(1, studentId);
+
+            result = pstmt.executeUpdate();  // 입력, 수정, 삭제 등의 SQL 실행 => 1:성공, 0:실패
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(pstmt != null) pstmt.close();
+                if(conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public StudentDTO selectFindById(int studentId) {
+        StudentDTO studentDTO = null;
+        String query = """
+                        SELECT * FROM mvc_student_tbl 
+                         WHERE studentId = ?
+        """;
+
+        try {
+            conn = DBUtil.getConnection();   // 오라클 연결
+            pstmt = conn.prepareStatement(query);   // SQL 작성
+            pstmt.setInt(1, studentId);
 
             rs = pstmt.executeQuery();
             if(rs.next()) {
-                book = new BookDTO();
-                book.setBookId(rs.getInt("bookid"));
-                book.setTitle(rs.getString("title"));
-                book.setAuthor(rs.getString("author"));
-                book.setPublisher(rs.getString("publisher"));
-                book.setPrice(rs.getInt("price"));
-                book.setPubdate(String.valueOf(rs.getDate("pubdate")));
+//                studentDTO = new BookDTO();
+                studentDTO.setStudentId(rs.getInt("studentId"));
+                studentDTO.setName(rs.getString("name"));
+                studentDTO.setBirthday(rs.getString("birthday"));
+                studentDTO.setPhone(rs.getString("phone"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -164,36 +156,34 @@ public class BookDAOImpl implements BookDAO {
             }
         }
 
-        return book;
+        return studentDTO;
     }
 
     @Override
-    public List<BookDTO> selectBookFindByTitle(String title) {
-        List<BookDTO> bookDTOList = new ArrayList<>();
+    public List<StudentDTO> selectFindByName(String name) {
+        List<StudentDTO> studentDTOList = new ArrayList<>();
 
         String query = """
                             SELECT * 
-                              FROM mvc_book_tbl 
-                             WHERE title LIKE '%' || ? || '%' 
-                             ORDER BY pubdate DESC
+                              FROM mvc_student_tbl 
+                             WHERE name LIKE '%' || ? || '%' 
+                             ORDER BY studentId DESC
         """;
 
         try {
             conn = DBUtil.getConnection();   // 오라클 연결
             pstmt = conn.prepareStatement(query);   // SQL 작성
-            pstmt.setString(1, title);
+            pstmt.setString(1, name);
 
             rs = pstmt.executeQuery();
 
             if(rs.next()) {
-                BookDTO book = new BookDTO();
-                book.setBookId(rs.getInt("bookid"));
-                book.setTitle(rs.getString("title"));
-                book.setAuthor(rs.getString("author"));
-                book.setPublisher(rs.getString("publisher"));
-                book.setPrice(rs.getInt("price"));
-                book.setPubdate(String.valueOf(rs.getDate("pubdate")));
-                bookDTOList.add(book);
+                StudentDTO studentDTO = new StudentDTO();
+                studentDTO.setStudentId(rs.getInt("studentId"));
+                studentDTO.setName(rs.getString("name"));
+                studentDTO.setBirthday(rs.getString("birthday"));
+                studentDTO.setPhone(rs.getString("phone"));
+                studentDTOList.add(studentDTO);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -207,17 +197,17 @@ public class BookDAOImpl implements BookDAO {
             }
         }
 
-        return bookDTOList;
+        return studentDTOList;
     }
 
     @Override
-    public List<BookDTO> selectBookFindAll() {
-        List<BookDTO> bookDTOList = new ArrayList<>();
+    public List<StudentDTO> selectFindByAll() {
+        List<StudentDTO> studentDTOList = new ArrayList<>();
 
         String query = """
                             SELECT * 
-                              FROM mvc_book_tbl 
-                             ORDER BY bookId ASC
+                              FROM mvc_student_tbl 
+                             ORDER BY studentId DESC
         """;
 
         try {
@@ -226,15 +216,13 @@ public class BookDAOImpl implements BookDAO {
 
             rs = pstmt.executeQuery();
 
-            while(rs.next()) {
-                BookDTO book = new BookDTO();
-                book.setBookId(rs.getInt("bookid"));
-                book.setTitle(rs.getString("title"));
-                book.setAuthor(rs.getString("author"));
-                book.setPublisher(rs.getString("publisher"));
-                book.setPrice(rs.getInt("price"));
-                book.setPubdate(String.valueOf(rs.getDate("pubdate")));
-                bookDTOList.add(book);
+            if(rs.next()) {
+                StudentDTO studentDTO = new StudentDTO();
+                studentDTO.setStudentId(rs.getInt("studentId"));
+                studentDTO.setName(rs.getString("name"));
+                studentDTO.setBirthday(rs.getString("birthday"));
+                studentDTO.setPhone(rs.getString("phone"));
+                studentDTOList.add(studentDTO);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -248,6 +236,6 @@ public class BookDAOImpl implements BookDAO {
             }
         }
 
-        return bookDTOList;
+        return studentDTOList;
     }
 }

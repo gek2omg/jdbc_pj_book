@@ -27,3 +27,11 @@ CREATE TABLE mvc_book_tbl (
 );
 
 SELECT * FROM mvc_book_tbl;
+
+-- 학생정보 테이블
+CREATE TABLE mvc_student_tbl (
+    studentId NUMBER(4) PRIMARY KEY, -- 학생번호
+    name varchar2(50) NOT NULL, -- 학생이름
+    birthday varchar2(6) NOT NULL, -- 생일
+    phone varchar2(13) NOT NULL, -- 전화번호
+);

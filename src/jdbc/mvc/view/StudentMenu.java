@@ -88,6 +88,20 @@ public class StudentMenu {
     }
 
     public StudentDTO studentInput() {
-        return null;
+        StudentDTO studentDTO = new StudentDTO();
+
+        System.out.print("이름 : ");
+        String name = scan.nextLine();
+        studentDTO.setName(name);
+
+        System.out.print("생년월일(6자리) : ");
+        String birthday = scan.nextLine();
+        studentDTO.setBirthday(birthday);
+
+        System.out.print("전화번호 : ");
+        String phone = scan.nextLine();
+        studentDTO.setPhone(phone);
+
+        return studentDTO;
     }
 }
