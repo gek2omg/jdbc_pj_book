@@ -2,6 +2,8 @@ package jdbc.mvc.view;
 
 import jdbc.mvc.dto.StudentDTO;
 
+import java.util.List;
+
 public class StudentView {
 
     private static StudentView instance;
@@ -14,9 +16,16 @@ public class StudentView {
     }
 
     public void studentSelect(StudentDTO studentDTO) {
-        System.out.println("<UNK> ID : " + studentDTO.getStudentId());
-        System.out.println("<UNK> : " + studentDTO.getName());
-        System.out.println("<UNK> : " + studentDTO.getBirthday());
-        System.out.println("<UNK> : " + studentDTO.getPhone());
+        System.out.println("학생 ID : " + studentDTO.getStudentId());
+        System.out.println("이름 : " + studentDTO.getName());
+        System.out.println("생년월일 : " + studentDTO.getBirthday());
+        System.out.println("연락처 : " + studentDTO.getPhone());
+        System.out.println("---------------------------------------");
+    }
+
+    public void studentList(List<StudentDTO> studentDTOs) {
+        for (StudentDTO studentDTO : studentDTOs) {
+            studentSelect(studentDTO);
+        }
     }
 }

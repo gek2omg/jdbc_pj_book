@@ -138,7 +138,7 @@ public class StudentDAOImpl implements StudentDAO {
 
             rs = pstmt.executeQuery();
             if(rs.next()) {
-//                studentDTO = new BookDTO();
+                studentDTO = new StudentDTO();
                 studentDTO.setStudentId(rs.getInt("studentId"));
                 studentDTO.setName(rs.getString("name"));
                 studentDTO.setBirthday(rs.getString("birthday"));

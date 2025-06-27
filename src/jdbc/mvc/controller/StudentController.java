@@ -6,6 +6,8 @@ import jdbc.mvc.service.StudentService;
 import jdbc.mvc.service.StudentServiceImpl;
 import jdbc.mvc.view.StudentView;
 
+import java.util.List;
+
 public class StudentController {
 
     private static StudentController instance;
@@ -65,8 +67,22 @@ public class StudentController {
     }
 
     // 학생 이름 검색
-    public void findByName(String name) {}
+    public void findByName(String name) {
+        List<StudentDTO> studentDTOs = studentService.findByName(name);
+        if(studentDTOs != null) {
+            studentView.studentList(studentDTOs);
+        } else {
+
+        }
+    }
 
     // 학생 전체 목록
-    public void findAll() {}
+    public void findAll() {
+        List<StudentDTO> studentDTOs = studentService.findAll();
+        if(studentDTOs != null) {
+            studentView.studentList(studentDTOs);
+        } else {
+
+        }
+    }
 }
