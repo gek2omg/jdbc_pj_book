@@ -31,7 +31,7 @@ public class StudentController {
         int result = studentService.save(studentDTO);
 
         if(result == 1) {
-
+            System.out.println("학생 정보 추가 완료");
         } else {
 
         }
