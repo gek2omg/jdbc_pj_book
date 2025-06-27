@@ -1,7 +1,7 @@
-package jdbc.mvc.view;
+package jdbc.mvc.view.student;
 
-import jdbc.mvc.controller.StudentController;
-import jdbc.mvc.dto.StudentDTO;
+import jdbc.mvc.domain.student.controller.StudentController;
+import jdbc.mvc.domain.student.dto.StudentDTO;
 import jdbc.mvc.util.InputValidate;
 
 import java.util.Scanner;

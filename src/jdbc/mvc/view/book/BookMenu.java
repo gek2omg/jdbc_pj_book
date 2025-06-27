@@ -1,7 +1,7 @@
-package jdbc.mvc.view;
+package jdbc.mvc.view.book;
 
-import jdbc.mvc.controller.BookController;
-import jdbc.mvc.dto.BookDTO;
+import jdbc.mvc.domain.book.controller.BookController;
+import jdbc.mvc.domain.book.dto.BookDTO;
 import jdbc.mvc.util.InputValidate;
 
 import java.util.Scanner;

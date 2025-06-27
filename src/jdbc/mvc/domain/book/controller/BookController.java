@@ -1,9 +1,9 @@
-package jdbc.mvc.controller;
+package jdbc.mvc.domain.book.controller;
 
-import jdbc.mvc.dto.BookDTO;
-import jdbc.mvc.service.BookService;
-import jdbc.mvc.service.BookServiceImpl;
-import jdbc.mvc.view.BookView;
+import jdbc.mvc.domain.book.dto.BookDTO;
+import jdbc.mvc.domain.book.service.BookService;
+import jdbc.mvc.domain.book.service.BookServiceImpl;
+import jdbc.mvc.view.book.BookView;
 
 import java.util.List;
 

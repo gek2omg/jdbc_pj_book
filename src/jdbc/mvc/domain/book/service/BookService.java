@@ -1,6 +1,6 @@
-package jdbc.mvc.service;
+package jdbc.mvc.domain.book.service;
 
-import jdbc.mvc.dto.BookDTO;
+import jdbc.mvc.domain.book.dto.BookDTO;
 
 import java.util.List;
 

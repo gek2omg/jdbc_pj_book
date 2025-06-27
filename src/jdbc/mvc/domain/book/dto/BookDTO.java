@@ -1,4 +1,4 @@
-package jdbc.mvc.dto;
+package jdbc.mvc.domain.book.dto;
 
 // DTO(데이터 전송 객체 : Data Transfer Object) => DB 테이블 : 멤버변수 : 화면 input 박스
 public class BookDTO {

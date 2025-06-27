@@ -1,6 +1,6 @@
-package jdbc.mvc.view;
+package jdbc.mvc.view.book;
 
-import jdbc.mvc.dto.BookDTO;
+import jdbc.mvc.domain.book.dto.BookDTO;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package jdbc.mvc.dto;
+package jdbc.mvc.domain.student.dto;
 
 public class StudentDTO {
     private int studentId;

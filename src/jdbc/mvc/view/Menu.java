@@ -1,8 +1,8 @@
 package jdbc.mvc.view;
 
-import jdbc.mvc.controller.BookController;
-import jdbc.mvc.dto.BookDTO;
 import jdbc.mvc.util.InputValidate;
+import jdbc.mvc.view.book.BookMenu;
+import jdbc.mvc.view.student.StudentMenu;
 
 import java.util.Scanner;
 
@@ -36,7 +36,6 @@ public class Menu {
                     bookMenu.book_menu();
                     break;
                 case 2:
-                    board_menu();
                     break;
                 case 3:
                     studentMenu.student_menu();
@@ -49,21 +48,5 @@ public class Menu {
                     System.out.println("메뉴를 다시 선택해주세요.");
             }
         }
-    }
-
-
-
-    /**
-     * 2. 게시판 메뉴
-     */
-    public void board_menu() {
-        System.out.println("<<< board_menu >>>");
-    }
-
-    /**
-     * 와인 메뉴
-     */
-    public void wine_menu() {
-        System.out.println("<<< wineMenu >>>");
     }
 }

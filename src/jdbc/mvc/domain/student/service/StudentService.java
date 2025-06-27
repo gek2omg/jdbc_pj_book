@@ -1,6 +1,6 @@
-package jdbc.mvc.service;
+package jdbc.mvc.domain.student.service;
 
-import jdbc.mvc.dto.StudentDTO;
+import jdbc.mvc.domain.student.dto.StudentDTO;
 
 import java.util.List;
 

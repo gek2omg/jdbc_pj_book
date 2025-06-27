@@ -1,7 +1,6 @@
-package jdbc.mvc.dao;
+package jdbc.mvc.domain.student.dao;
 
-import jdbc.mvc.dto.BookDTO;
-import jdbc.mvc.dto.StudentDTO;
+import jdbc.mvc.domain.student.dto.StudentDTO;
 import jdbc.mvc.util.DBUtil;
 
 import java.sql.Connection;

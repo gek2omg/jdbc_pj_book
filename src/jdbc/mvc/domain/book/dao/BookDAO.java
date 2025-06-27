@@ -1,6 +1,6 @@
-package jdbc.mvc.dao;
+package jdbc.mvc.domain.book.dao;
 
-import jdbc.mvc.dto.BookDTO;
+import jdbc.mvc.domain.book.dto.BookDTO;
 
 import java.util.List;
 

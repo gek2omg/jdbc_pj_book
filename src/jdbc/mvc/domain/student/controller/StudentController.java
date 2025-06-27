@@ -1,10 +1,9 @@
-package jdbc.mvc.controller;
+package jdbc.mvc.domain.student.controller;
 
-import jdbc.mvc.dto.StudentDTO;
-import jdbc.mvc.service.BookServiceImpl;
-import jdbc.mvc.service.StudentService;
-import jdbc.mvc.service.StudentServiceImpl;
-import jdbc.mvc.view.StudentView;
+import jdbc.mvc.domain.student.dto.StudentDTO;
+import jdbc.mvc.domain.student.service.StudentService;
+import jdbc.mvc.domain.student.service.StudentServiceImpl;
+import jdbc.mvc.view.student.StudentView;
 
 import java.util.List;
 

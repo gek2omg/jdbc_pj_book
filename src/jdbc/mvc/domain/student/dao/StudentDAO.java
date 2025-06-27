@@ -1,6 +1,6 @@
-package jdbc.mvc.dao;
+package jdbc.mvc.domain.student.dao;
 
-import jdbc.mvc.dto.StudentDTO;
+import jdbc.mvc.domain.student.dto.StudentDTO;
 
 import java.util.List;
 
