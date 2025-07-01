@@ -28,7 +28,48 @@ CREATE TABLE mvc_book_tbl (
 
 SELECT * FROM mvc_book_tbl;
 
--- 학생정보 테이블
+----------------------------------------------------------------------------------
+-- 2) 게시판 테이블 (scott_05 계정에서 생성)
+DROP TABLE MVC_BOARD_TBL CASCADE CONSTRAINTS;
+CREATE TABLE MVC_BOARD_TBL (
+    BOARDNO         NUMBER(7) PRIMARY KEY,  -- 글번호
+    BOARDTITLE      VARCHAR2(50) NOT NULL,  -- 글제목
+    BOARDCONTENT    CLOB NOT NULL,          -- 글내용
+    BOARDID         VARCHAR2(50) NOT NULL,  -- 작서자
+    BOARDREGDATE    DATE DEFAULT SYSDATE    -- 작성일
+);
+
+SELECT * FROM MBC_BOARD_TBL;
+
+---------------------------------------------------------------------------------
+1. 플젝생성
+2. 패키지 미치 파일생성
+3. 테이블 생성
+4. DTO 구현
+5. 전체 구현
+Main -> Menu -> View -> Controller -> Service -> DTO + DAO
+                View <- Controller <- Service <- DTO + DAO
+Model : 모델 => 고객의 요청 처리 => DB 처리(입력, 수정, 삭제, 조회)
+View : 뷰 => 결과 화면
+Controller : 컨트롤러 => 고객의 요청 및 흐름 제어 담당
+
+6. DAOImple 에 싱글통 구현
+
+pstmt.executeUpdate();  // I,U,D 에 사용된다. 리턴타입은 int => 성공(1), 실패(0)
+pstmt.executeQuery(); // Select 에 사용된다 리턴타입은 ResultSet
+
+특수문자 단축키 : 한글모드 ㅁ+한자키
+
+// 에러정리
+java.sql.SQLException : 인덱스에서 누락된 IN 또는 OUT 매개변수 :: 4
+=> ? 와 pstmt 설정 갯수가 맞지 않을 때
+
+// 추가 성공여부 =>
+sql developer 에서 select 성공
+
+----------------------------------------------------------------------------------
+
+-- 3) 학생정보 테이블
 CREATE TABLE mvc_student_tbl (
     studentId NUMBER(4) PRIMARY KEY, -- 학생번호
     name varchar2(50) NOT NULL, -- 학생이름
