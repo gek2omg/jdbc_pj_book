@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface StudentService {
 
-    public int save(StudentDTO studentDTO);
-    public int modify(int studentId, StudentDTO studentDTO);
-    public int remove(int studentId);
-    public StudentDTO findById(int studentId);
-    public List<StudentDTO> findByName(String name);
-    public List<StudentDTO> findAll();
+    public int createStudent(StudentDTO studentDTO);
+    public int updateStudent(int studentId, StudentDTO studentDTO);
+    public int removeStudent(int studentId);
+    public StudentDTO getStudentById(int studentId);
+    public List<StudentDTO> getStudentByName(String name);
+    public List<StudentDTO> getStudentAll();
 }

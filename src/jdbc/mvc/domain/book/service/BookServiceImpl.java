@@ -22,7 +22,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public int saveBook(BookDTO bookDTO) {
+    public int createBook(BookDTO bookDTO) {
         System.out.println("BookServiceImpl - bookInsert()");
 
         int result = bookDAO.insertBook(bookDTO);
@@ -31,7 +31,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public int modifyBook(int bookId, BookDTO bookDTO) {
+    public int updateBook(int bookId, BookDTO bookDTO) {
         System.out.println("BookServiceImpl - modifyBook()");
 
         bookDTO.setBookId(bookId);
@@ -50,26 +50,26 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDTO findBookById(int bookId) {
+    public BookDTO getBookById(int bookId) {
         System.out.println("BookServiceImpl - findBookById()");
 
-        BookDTO book = bookDAO.selectBookFindById(bookId);
+        BookDTO book = bookDAO.findById(bookId);
         return book;
     }
 
     @Override
-    public List<BookDTO> findBookByTitle(String title) {
+    public List<BookDTO> getBookByTitle(String title) {
         System.out.println("BookServiceImpl - findBookByTitle()");
 
-        List<BookDTO> book = bookDAO.selectBookFindByTitle(title);
+        List<BookDTO> book = bookDAO.findByTitle(title);
         return book;
     }
 
     @Override
-    public List<BookDTO> findBookAll() {
+    public List<BookDTO> getBookAll() {
         System.out.println("BookServiceImpl - findBookAll()");
 
-        List<BookDTO> books = bookDAO.selectBookFindAll();
+        List<BookDTO> books = bookDAO.findAll();
         return books;
     }
 }

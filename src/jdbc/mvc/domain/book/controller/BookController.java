@@ -36,7 +36,7 @@ public class BookController {
         System.out.println("<<< saveBook() >>>");
         System.out.println(bookDTO);
 
-        int insertCnt = bookService.saveBook(bookDTO);
+        int insertCnt = bookService.createBook(bookDTO);
 
         if (insertCnt == 1) {
             System.out.println("도서 정보 추가 성공!!" + insertCnt);
@@ -49,7 +49,7 @@ public class BookController {
     public void modifyBook(int bookId, BookDTO bookDTO) {
         System.out.println("<<< modifyBook() >>>");
 
-        int result = bookService.modifyBook(bookId, bookDTO);
+        int result = bookService.updateBook(bookId, bookDTO);
 
         if (result == 1) {
             System.out.println("도서 정보 수정 성공!!" + result);
@@ -74,7 +74,7 @@ public class BookController {
     // 4.도서 아이디 조회
     public void findBookById(int bookId) {
         System.out.println("<<< findBookById() >>>");
-        BookDTO book = bookService.findBookById(bookId);
+        BookDTO book = bookService.getBookById(bookId);
         if(book != null) {
             System.out.println("도서 ID 조회 성공");
             System.out.println("---------------------------------");
@@ -87,7 +87,7 @@ public class BookController {
     // 5.도서제목 조회
     public void findBookByTitle(String title) {
         System.out.println("<<< findBookByTitle() >>>");
-        List<BookDTO> bookDTOList = bookService.findBookByTitle(title);
+        List<BookDTO> bookDTOList = bookService.getBookByTitle(title);
         if (bookDTOList != null) {
             System.out.println("도서 정보 제목 조회 성공!!");
             System.out.println("---------------------------------");
@@ -101,7 +101,7 @@ public class BookController {
     // 6.전체목록 조회
     public void findBookAll() {
         System.out.println("<<< findBookAll() >>>");
-        List<BookDTO> bookDTOList = bookService.findBookAll();
+        List<BookDTO> bookDTOList = bookService.getBookAll();
         if (bookDTOList != null) {
             System.out.println("도서 정보 전체 조회 성공!!");
             System.out.println("---------------------------------");

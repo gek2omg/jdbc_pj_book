@@ -22,33 +22,33 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public int save(StudentDTO studentDTO) {
-        return studentDAO.insert(studentDTO);
+    public int createStudent(StudentDTO studentDTO) {
+        return studentDAO.insertBook(studentDTO);
     }
 
     @Override
-    public int modify(int studentId, StudentDTO studentDTO) {
+    public int updateStudent(int studentId, StudentDTO studentDTO) {
         studentDTO.setStudentId(studentId);
-        return studentDAO.update(studentDTO);
+        return studentDAO.updateBook(studentDTO);
     }
 
     @Override
-    public int remove(int studentId) {
-        return studentDAO.delete(studentId);
+    public int removeStudent(int studentId) {
+        return studentDAO.deleteBook(studentId);
     }
 
     @Override
-    public StudentDTO findById(int studentId) {
-        return studentDAO.selectFindById(studentId);
+    public StudentDTO getStudentById(int studentId) {
+        return studentDAO.findById(studentId);
     }
 
     @Override
-    public List<StudentDTO> findByName(String name) {
-        return studentDAO.selectFindByName(name);
+    public List<StudentDTO> getStudentByName(String name) {
+        return studentDAO.findByName(name);
     }
 
     @Override
-    public List<StudentDTO> findAll() {
-        return studentDAO.selectFindByAll();
+    public List<StudentDTO> getStudentAll() {
+        return studentDAO.findAll();
     }
 }

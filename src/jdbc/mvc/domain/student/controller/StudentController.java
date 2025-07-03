@@ -28,7 +28,7 @@ public class StudentController {
     // 학생 저장
     public void save(StudentDTO studentDTO) {
         System.out.println("save");
-        int result = studentService.save(studentDTO);
+        int result = studentService.createStudent(studentDTO);
 
         if(result == 1) {
             System.out.println("학생 정보 추가 완료");
@@ -39,7 +39,7 @@ public class StudentController {
 
     // 학생 수정
     public void modify(int studentId, StudentDTO studentDTO) {
-        int result = studentService.modify(studentId, studentDTO);
+        int result = studentService.updateStudent(studentId, studentDTO);
 
         if(result == 1) {
 
@@ -50,7 +50,7 @@ public class StudentController {
 
     // 학생 삭제
     public void remove(int studentId) {
-        int result = studentService.remove(studentId);
+        int result = studentService.removeStudent(studentId);
 
         if(result == 1) {
 
@@ -61,13 +61,13 @@ public class StudentController {
 
     // 학생 ID 조회
     public void findById(int studentId) {
-        StudentDTO studentDTO = studentService.findById(studentId);
+        StudentDTO studentDTO = studentService.getStudentById(studentId);
         studentView.studentSelect(studentDTO);
     }
 
     // 학생 이름 검색
     public void findByName(String name) {
-        List<StudentDTO> studentDTOs = studentService.findByName(name);
+        List<StudentDTO> studentDTOs = studentService.getStudentByName(name);
         if(studentDTOs != null) {
             studentView.studentList(studentDTOs);
         } else {
@@ -77,7 +77,7 @@ public class StudentController {
 
     // 학생 전체 목록
     public void findAll() {
-        List<StudentDTO> studentDTOs = studentService.findAll();
+        List<StudentDTO> studentDTOs = studentService.getStudentAll();
         if(studentDTOs != null) {
             studentView.studentList(studentDTOs);
         } else {

@@ -28,7 +28,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public int insert(StudentDTO studentDTO) {
+    public int insertBook(StudentDTO studentDTO) {
         System.out.println("insert");
         String query = """
                         INSERT INTO mvc_student_tbl(studentId, name, birthday, phone)
@@ -61,7 +61,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public int update(StudentDTO studentDTO) {
+    public int updateBook(StudentDTO studentDTO) {
         int result  = 0;
 
         String query = """
@@ -94,7 +94,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public int delete(int studentId) {
+    public int deleteBook(int studentId) {
         int result  = 0;
 
         String query = """
@@ -123,7 +123,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public StudentDTO selectFindById(int studentId) {
+    public StudentDTO findById(int studentId) {
         StudentDTO studentDTO = null;
         String query = """
                         SELECT * FROM mvc_student_tbl 
@@ -159,7 +159,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public List<StudentDTO> selectFindByName(String name) {
+    public List<StudentDTO> findByName(String name) {
         List<StudentDTO> studentDTOList = new ArrayList<>();
 
         String query = """
@@ -200,7 +200,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public List<StudentDTO> selectFindByAll() {
+    public List<StudentDTO> findAll() {
         List<StudentDTO> studentDTOList = new ArrayList<>();
 
         String query = """

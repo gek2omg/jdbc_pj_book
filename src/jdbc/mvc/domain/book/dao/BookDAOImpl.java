@@ -130,7 +130,7 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public BookDTO selectBookFindById(int bookId) {
+    public BookDTO findById(int bookId) {
         BookDTO book = null;
         String query = """
                         SELECT * FROM mvc_book_tbl 
@@ -168,7 +168,7 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public List<BookDTO> selectBookFindByTitle(String title) {
+    public List<BookDTO> findByTitle(String title) {
         List<BookDTO> bookDTOList = new ArrayList<>();
 
         String query = """
@@ -211,7 +211,7 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public List<BookDTO> selectBookFindAll() {
+    public List<BookDTO> findAll() {
         List<BookDTO> bookDTOList = new ArrayList<>();
 
         String query = """
