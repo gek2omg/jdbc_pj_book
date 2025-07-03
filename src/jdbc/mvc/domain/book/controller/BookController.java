@@ -32,7 +32,7 @@ public class BookController {
     }
 
     // 1.도서 추가
-    public void saveBook(BookDTO bookDTO) {
+    public void createBook(BookDTO bookDTO) {
         System.out.println("<<< saveBook() >>>");
         System.out.println(bookDTO);
 
@@ -46,7 +46,7 @@ public class BookController {
     }
 
     // 2.도서 수정
-    public void modifyBook(int bookId, BookDTO bookDTO) {
+    public void updateBook(int bookId, BookDTO bookDTO) {
         System.out.println("<<< modifyBook() >>>");
 
         int result = bookService.updateBook(bookId, bookDTO);
@@ -72,7 +72,7 @@ public class BookController {
     }
 
     // 4.도서 아이디 조회
-    public void findBookById(int bookId) {
+    public void getBookById(int bookId) {
         System.out.println("<<< findBookById() >>>");
         BookDTO book = bookService.getBookById(bookId);
         if(book != null) {
@@ -85,7 +85,7 @@ public class BookController {
     }
 
     // 5.도서제목 조회
-    public void findBookByTitle(String title) {
+    public void getBookByTitle(String title) {
         System.out.println("<<< findBookByTitle() >>>");
         List<BookDTO> bookDTOList = bookService.getBookByTitle(title);
         if (bookDTOList != null) {
@@ -99,7 +99,7 @@ public class BookController {
     }
 
     // 6.전체목록 조회
-    public void findBookAll() {
+    public void getAllBook() {
         System.out.println("<<< findBookAll() >>>");
         List<BookDTO> bookDTOList = bookService.getBookAll();
         if (bookDTOList != null) {

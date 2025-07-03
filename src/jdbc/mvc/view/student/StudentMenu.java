@@ -37,25 +37,25 @@ public class StudentMenu {
 
             switch(menuNo) {
                 case 1:
-                    studentController.save(studentInput());
+                    studentController.createStudent(studentInput());
                     break;
                 case 2:
                     int studentId = studentId();
-                    studentController.findById(studentId);
-                    studentController.modify(studentId, studentInput());
-                    studentController.findById(studentId);
+                    studentController.getStudentById(studentId);
+                    studentController.updateStudent(studentId, studentInput());
+                    studentController.getStudentById(studentId);
                     break;
                 case 3:
-                    studentController.remove(studentId());
+                    studentController.removeStudent(studentId());
                     break;
                 case 4:
-                    studentController.findById(studentId());
+                    studentController.getStudentById(studentId());
                     break;
                 case 5:
-                    studentController.findByName(studentName());
+                    studentController.getStudentByName(studentName());
                     break;
                 case 6:
-                    studentController.findAll();
+                    studentController.getAllStudent();
                     break;
                 case 7:
                     System.out.println("프로그램을 종료합니다.");

@@ -15,6 +15,26 @@ public class StudentView {
         return instance;
     }
 
+
+    public void studentErrorMsg(String msg) {
+        switch (msg) {
+            case "insert":
+                System.out.println("학생 추가 실패!!");
+                break;
+            case "update":
+                System.out.println("학생 수정 실패!!");
+                break;
+            case "delete":
+                System.out.println("학생 삭제 실패!!");
+                break;
+            case "select":
+                System.out.println("학생 조회 실패!!");
+                break;
+            default:
+                System.out.println("ERROR!!");
+        }
+    }
+
     public void studentSelect(StudentDTO studentDTO) {
         System.out.println("학생 ID : " + studentDTO.getStudentId());
         System.out.println("이름 : " + studentDTO.getName());
