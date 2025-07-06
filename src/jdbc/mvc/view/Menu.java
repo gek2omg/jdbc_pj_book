@@ -1,6 +1,7 @@
 package jdbc.mvc.view;
 
 import jdbc.mvc.util.InputValidate;
+import jdbc.mvc.view.board.BoardMenu;
 import jdbc.mvc.view.book.BookMenu;
 import jdbc.mvc.view.student.StudentMenu;
 
@@ -15,6 +16,7 @@ import java.util.Scanner;
 public class Menu {
 
     BookMenu bookMenu = BookMenu.getInstance();
+    BoardMenu boardMenu = BoardMenu.getInstance();
     StudentMenu studentMenu = StudentMenu.getInstance();
 
 
@@ -36,6 +38,7 @@ public class Menu {
                     bookMenu.book_menu();
                     break;
                 case 2:
+                    boardMenu.board_menu();
                     break;
                 case 3:
                     studentMenu.student_menu();
