@@ -26,3 +26,5 @@ public interface BoardDAO {
     public List<BoardDTO> findAll();
 
 }
+
+
