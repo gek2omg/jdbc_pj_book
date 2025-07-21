@@ -76,5 +76,3 @@ CREATE TABLE mvc_student_tbl (
     birthday varchar2(6) NOT NULL, -- 생일
     phone varchar2(13) NOT NULL, -- 전화번호
 );
-
-충돌테스트1
