@@ -77,4 +77,4 @@ CREATE TABLE mvc_student_tbl (
     phone varchar2(13) NOT NULL, -- 전화번호
 );
 
-충돌테스트2
+dev 생성
